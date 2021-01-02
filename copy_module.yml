@@ -1,0 +1,11 @@
+---
+- name: this playbook will copy a file
+  hosts: all
+  become: true
+  tasks:
+  - name: copying a file
+    copy:
+        src: /home/ansible/variables.yml
+        dest: /home/ansible
+        mode: 0755
+        owner: rahul

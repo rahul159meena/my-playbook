@@ -1,0 +1,6 @@
+--- # target script
+- hosts: webservers
+  user: ansible
+  become: yes
+
+

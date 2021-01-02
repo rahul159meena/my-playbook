@@ -1,0 +1,37 @@
+---
+- name: Setup Tomcat
+  hosts: all
+  become: true
+  tasks:
+        - name: Install java on RHEL
+          yum:
+              name: java
+              state: installed
+          when: ansible_os_family == "RedHat"
+
+        - name: Install Java on ubuntu
+          apt:
+              name: default-jdk
+              state: present
+          when: ansible_os_family == "Debian"
+
+        - name: Download Tomcat
+          get_url:                                        # to download the tomcat from the internet
+                  url: https://downloads.apache.org/tomcat/tomcat-8/v8.5.61/bin/apache-tomcat-8.5.61.tar.gz
+                  dest: /opt
+
+        - name: Extracting tomcat
+          unarchive:                                      # to extract the downloaded file
+                    src: /opt/apache-tomcat-8.5.61.tar.gz
+                    dest: /opt
+                    remote_src: yes      # to confirm whether file is present there or not on the source 
+
+        - name: add execute permission
+          file:
+               path: /opt/apache-tomcat-8.5.61/bin/startup.sh
+               mode: 0777
+
+        - name: start tomcat service 
+          shell: nohup ./startup.sh
+          args:                                      # path where this startup script is placed
+               chdir:  /opt/apache-tomcat-8.5.61/bin

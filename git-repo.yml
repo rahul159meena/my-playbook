@@ -1,0 +1,9 @@
+---
+- name: clone github repo
+  hosts: all
+  become: true
+  tasks:
+  - name: clone a repo
+    git:
+        repo: https://rahul159meena:Jitu%401509@github.com/rahul159meena/saivault.git
+        dest: /home/ansible/sai-vault

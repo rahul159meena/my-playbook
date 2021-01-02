@@ -1,0 +1,13 @@
+--- 
+- name: this playbook creates users
+  hosts: 172.31.32.164 
+  become: true
+  tasks:
+  - name: installing multiple packages
+    yum:
+      name: "{{ item }}"
+      state: present 
+    with_items:
+     -  tree
+     -  git
+     -  python      

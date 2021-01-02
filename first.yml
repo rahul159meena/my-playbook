@@ -1,0 +1,13 @@
+--- # my first playbook
+- hosts: webservers
+  become: yes
+  tasks:
+  - name: Install a package
+    yum:
+        name: httpd
+        state: absent
+  - name: Note apache is running
+    service:
+        name: httpd
+        state: started
+...

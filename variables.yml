@@ -1,0 +1,11 @@
+--- #my variables playbooks
+- hosts: webservers
+  user: ansible
+  become: true
+  vars:
+       pkg: httpd
+  tasks:
+  - name: uninstall a package
+    yum: name={{ pkg }} state=absent
+
+   
